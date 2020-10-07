@@ -84,9 +84,9 @@ def get_dictionary(data_path: str, dictionary_path: str):
 
     with open(dictionary_path, 'w') as f:
         for w in single_dictionary:
-            f.write('1 ' + w + ' ' + str(single_cnt[w]) + '\n')
+            f.write('1' + ' ' + str(single_cnt[w]) + ' ' + w + '\n')
         for w in double_dictionary:
-            f.write('2 ' + w + ' ' + str(double_cnt[w]) + '\n')
+            f.write('2' + ' ' + str(double_cnt[w]) + ' ' + w + '\n')
 
 
 if __name__ == '__main__':
