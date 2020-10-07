@@ -1,6 +1,17 @@
 from copy import deepcopy
 
 
+def simplify_data(data_path: str, save_path: str):
+    target = open(save_path, 'w')
+    with open(data_path) as f:
+        for line in f:
+            words = line.split()
+            for i in range(len(words)):
+                target.write((words[i].split('/'))[0].strip('[').strip(']') +
+                             ' ')
+            target.write('\n')
+
+
 def check_not_mark(word: str) -> bool:
     if word == "。":
         return False
@@ -32,19 +43,20 @@ def check_not_mark(word: str) -> bool:
         return False
     if word == "］":
         return False
+    if word == "；":
+        return False
+    if word == "：":
+        return False
     return True
 
 
-if __name__ == '__main__':
-    import os
-    os.chdir("../data")
-
+def get_dictionary(data_path: str, dictionary_path: str):
     single_dictionary = []
     double_dictionary = []
     single_cnt = {}
     double_cnt = {}
 
-    with open('199801_seg&pos.txt') as f:
+    with open(data_path) as f:
         for line in f:
             words = line.split()
 
@@ -70,9 +82,14 @@ if __name__ == '__main__':
     double_dictionary = list(set(double_dictionary))
     double_dictionary = sorted(double_dictionary)
 
-    os.chdir("../result")
-    with open('dic.txt', 'w') as f:
+    with open(dictionary_path, 'w') as f:
         for w in single_dictionary:
             f.write('1 ' + w + ' ' + str(single_cnt[w]) + '\n')
         for w in double_dictionary:
             f.write('2 ' + w + ' ' + str(double_cnt[w]) + '\n')
+
+
+if __name__ == '__main__':
+    # simplify_data('../data/199801_seg&pos.txt', '../result/simplified.txt')
+
+    get_dictionary('../data/199801_seg&pos.txt', '../result/dic.txt')
