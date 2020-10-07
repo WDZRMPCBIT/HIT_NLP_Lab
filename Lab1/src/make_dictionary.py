@@ -12,6 +12,7 @@ with open('199801_seg&pos.txt') as f:
 dictionary = list(set(dictionary))
 dictionary = sorted(dictionary)
 
+os.chdir("../result")
 with open('dic.txt', 'w') as f:
     for w in dictionary:
         f.write(w + '\n')
