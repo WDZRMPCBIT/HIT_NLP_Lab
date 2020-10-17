@@ -13,39 +13,9 @@ def simplify_data(data_path: str, save_path: str):
 
 
 def check_not_mark(word: str) -> bool:
-    if word == "。":
-        return False
-    if word == "《":
-        return False
-    if word == "》":
-        return False
-    if word == "，":
-        return False
-    if word == "“":
-        return False
-    if word == "”":
-        return False
-    if word == "、":
-        return False
-    if word == "！":
-        return False
-    if word == "？":
-        return False
-    if word == "‘":
-        return False
-    if word == "’":
-        return False
-    if word == "（":
-        return False
-    if word == "）":
-        return False
-    if word == "［":
-        return False
-    if word == "］":
-        return False
-    if word == "；":
-        return False
-    if word == "：":
+    marks = ["。", "，", "《", "》", "“", "”", "、", "！",
+             "？", "‘", "’", "（", "）", "［", "］", "；", "："]
+    if word in marks:
         return False
     return True
 
