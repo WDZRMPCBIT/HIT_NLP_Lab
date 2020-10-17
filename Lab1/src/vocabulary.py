@@ -3,9 +3,10 @@ from copy import deepcopy
 
 
 class Vocabulary(object):
-    def __init__(self, storage):
+    def __init__(self, storage, max_length):
         self.__vocabulary: List[Phrase] = []
         self.__storage = deepcopy(storage)
+        self.__max_length = max_length
 
     def add(self, words: List[str], occ: List[int]):
         """
@@ -31,21 +32,31 @@ class Vocabulary(object):
             return True
         return False
 
-    def load(self, path: str, storage):
+    def load(self, path: str, length: int, storage):
         """
         从词典文件中加载词组
         词典文件每一行的格式为：
         词组单词个数 词组出现次数 单词1 单词2 ...
 
         :param path: 词典文件路径
+        :param length: 词组单词的最大个数
         :param storage: 词典组织类
         """
-        ret = Vocabulary(storage)
+        ret = Vocabulary(storage, length)
         with open(path, 'r') as f:
             for line in f:
                 items = line.split()
+                if items[0] > length:
+                    continue
+
                 ret.add(items[2:], items[1])
         return ret
+
+    def max_length(self):
+        """
+        返回词典中词组的最大长度
+        """
+        return self.__max_length
 
 
 class Phrase(object):
