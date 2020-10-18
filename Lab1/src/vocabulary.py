@@ -7,7 +7,7 @@ class Vocabulary(object):
         self.__vocabulary: List[Phrase] = []
         self.__storage = deepcopy(storage)
 
-    def add(self, words: List[str], occ: List[int]):
+    def add(self, words: List[str], occ: int):
         """
         向词组表中添加一个词组
 
@@ -16,7 +16,7 @@ class Vocabulary(object):
         """
         current = Phrase(words, occ)
         if self.__storage.get(current.phrase()) == -1:
-            self.__storage.add(current.add(current.phrase()))
+            self.__storage.add(current.phrase(), occ)
             self.__vocabulary.append(current)
 
     def get(self, words: List[str]) -> bool:
@@ -31,7 +31,7 @@ class Vocabulary(object):
             return True
         return False
 
-    def load(self, path: str, length: int, storage):
+    def load(path: str, length: int, storage):
         """
         从词典文件中加载词组
         词典文件每一行的格式为：
@@ -45,6 +45,9 @@ class Vocabulary(object):
         with open(path, 'r') as f:
             for line in f:
                 items = line.split()
+
+                if int(items[0]) > length:
+                    break
                 ret.add(items[2:], items[1])
         return ret
 
@@ -56,6 +59,7 @@ class Vocabulary(object):
         ret = 0
         for phrase in self.__vocabulary:
             ret = max(ret, phrase.length())
+        return ret
 
 
 class Phrase(object):
@@ -80,14 +84,20 @@ class Phrase(object):
         将存储的词组以单个string的形式返回
         """
         ret: str = ""
-        for i in range(self.length()):
+        for i in range(len(self.__words)):
             if i != 0:
                 ret = ret + " "
             ret = ret + self.__words[i]
         return ret
 
     def occ(self):
+        """
+        返回该词组出现的次数
+        """
         return self.__occ
 
     def length(self):
-        return len(self.__words)
+        """
+        返回组成词组的字的个数
+        """
+        return len(self.phrase())

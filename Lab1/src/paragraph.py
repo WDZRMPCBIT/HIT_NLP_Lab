@@ -38,25 +38,30 @@ class Paragraph(object):
             return
 
         for i in range(self.length()):
-            self.__lines[i] = tokenizer(self.__lines[i])
+            self.__lines[i] = tokenizer(self.__lines[i][0])
         self.set_tokenized()
 
-    def load(self, path: str, tokenized: bool):
+    def load(path: str, tokenized: bool, max_line: int = None):
         """
         从数据文件中读取文章
 
         :param path: 文章路径
         :param tokenized: 读取的文章是否已完成分词
+        :param max_line: 最大行数
         """
         lines: List[List[str]] = []
         with open(path, 'r') as f:
+            i = 0
             for line in f:
                 lines.append(line.split())
+                i += 1
+                if max_line is not None and i == max_line:
+                    break
 
         paragraph = Paragraph(lines)
         if tokenized:
             paragraph.set_tokenized()
-        return Paragraph(paragraph)
+        return paragraph
 
     def save(self, path: str):
         """
@@ -65,7 +70,7 @@ class Paragraph(object):
         :param path: 保存路径
         """
         with open(path, 'w') as f:
-            for line in self.__lines():
+            for line in self.__lines:
                 for word in line:
                     f.write(word + " ")
                 f.write("\n")
