@@ -18,26 +18,26 @@
 ## src文件夹
 ### [main.py](src/main.py)
 入口函数，用于调用和测试
-### config.py
+### [config.py](src/config.py)
 整合了各种可以修改的参数，含义可以看相应的help  
 方便同意设置参数
-### pre-treat.py
+### [pre-treat.py](src/pre-treat.py)
 用于生成词典文件和简化后的文章（去掉用不到的词性）  
 分别存储在result下的dic.txt和simplified.txt  
 词典的每一行格式为：  
 该词组所含单词个数 词组出现的频率 单词1 单词2 ...
-### paragraph.py
+### [paragraph.py](src/paragraph.py)
 内含一个处理文章的类  
 有一个tokenize方法，用于对文章进行分词操作，需接收一个分词器（tokenizer）
-### vocabulary.py
+### [vocabulary.py](src/vocabulary.py)
 内含一个处理词组表的类  
 实例化时需要接收一个组织存储结构的方式（storage）
-### utils.py
+### [utils.py](src/utils.py)
 各种计算评测结果的函数  
 我个人建议每个方法接收两个Paragraph作为参数
-### storage
+### [storage](src/storage)
 词典结构组织器的文件夹  
 每个组织器应当实现add(str)和get(str) -> int两个方法
-### tokenizer
+### [tokenizer](src/tokenizer)
 分词器的文件夹  
 每个分词器应当实现__call__(str) -> List[str]方法
