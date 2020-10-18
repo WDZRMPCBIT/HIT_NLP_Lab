@@ -26,7 +26,7 @@ def get_dictionary(data_path: str, dictionary_path: str):
     single_cnt = {}
     double_cnt = {}
 
-    with open(data_path) as f:
+    with open(data_path, encoding='utf-8') as f:
         for line in f:
             words = line.split()
 

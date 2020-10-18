@@ -9,8 +9,6 @@ if __name__ == "__main__":
     vocabulary = Vocabulary.load(
         args.vocabulary_path, args.max_length, storage)
 
-    print(vocabulary.get("迈向"))
-
     if args.tokenizer == "forward":
         from tokenizer.forward import forward
         tokenizer = forward(vocabulary)

@@ -50,7 +50,7 @@ class Paragraph(object):
         :param max_line: 最大行数
         """
         lines: List[List[str]] = []
-        with open(path, 'r') as f:
+        with open(path, 'r', encoding='utf-8') as f:
             i = 0
             for line in f:
                 lines.append(line.split())

@@ -42,7 +42,7 @@ class Vocabulary(object):
         :param storage: 词典组织类
         """
         ret = Vocabulary(storage)
-        with open(path, 'r') as f:
+        with open(path, 'r', encoding='utf-8') as f:
             for line in f:
                 items = line.split()
 

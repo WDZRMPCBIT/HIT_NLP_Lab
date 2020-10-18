@@ -12,7 +12,7 @@ parser.add_argument('--tokenizer', '-t', type=str,
                     default="forward", help="分词器类型")
 parser.add_argument('--storage', '-s', type=str,
                     default="linear_list", help="词典组织结构")
-parser.add_argument('--max_line', '-ml', type=int, default=1, help="处理文件最大行数")
+parser.add_argument('--max_line', '-ml', type=int, default=10, help="处理文件最大行数")
 parser.add_argument('--max_length', '-mal', type=int,
                     default=1, help="组成词组的最大单词数")
 
