@@ -14,7 +14,7 @@ class forward(object):
         max_length = self.__vocabulary.max_length()
 
         while current < length:
-            for i in reversed(range(max_length)):
+            for i in reversed(range(1, max_length)):
                 if self.__vocabulary.get([line[current: current+i]]):
                     ret.append(line[current: current+i])
                     current = current + i

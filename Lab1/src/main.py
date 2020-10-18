@@ -12,6 +12,9 @@ if __name__ == "__main__":
     if args.tokenizer == "forward":
         from tokenizer.forward import forward
         tokenizer = forward(vocabulary)
+    if args.tokenizer == "backward":
+        from tokenizer.backward import backward
+        tokenizer = backward(vocabulary)
     paragraph = Paragraph.load(args.data_path, False, args.max_line)
     paragraph.tokenize(tokenizer)
     paragraph.save(args.result_path)
