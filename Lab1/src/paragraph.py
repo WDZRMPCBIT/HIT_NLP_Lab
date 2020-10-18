@@ -41,11 +41,12 @@ class Paragraph(object):
             self.__lines[i] = tokenizer(self.__lines[i])
         self.set_tokenized()
 
-    def load(self, path: str):
+    def load(self, path: str, tokenized: bool):
         """
         从数据文件中读取文章
 
         :param path: 文章路径
+        :param tokenized: 读取的文章是否已完成分词
         """
         lines: List[List[str]] = []
         with open(path, 'r') as f:
@@ -53,7 +54,8 @@ class Paragraph(object):
                 lines.append(line.split())
 
         paragraph = Paragraph(lines)
-        paragraph.set_tokenized()
+        if tokenized:
+            paragraph.set_tokenized()
         return Paragraph(paragraph)
 
     def save(self, path: str):

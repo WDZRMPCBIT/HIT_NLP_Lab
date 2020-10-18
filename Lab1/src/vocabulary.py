@@ -3,10 +3,9 @@ from copy import deepcopy
 
 
 class Vocabulary(object):
-    def __init__(self, storage, max_length):
+    def __init__(self, storage):
         self.__vocabulary: List[Phrase] = []
         self.__storage = deepcopy(storage)
-        self.__max_length = max_length
 
     def add(self, words: List[str], occ: List[int]):
         """
@@ -42,21 +41,21 @@ class Vocabulary(object):
         :param length: 词组单词的最大个数
         :param storage: 词典组织类
         """
-        ret = Vocabulary(storage, length)
+        ret = Vocabulary(storage)
         with open(path, 'r') as f:
             for line in f:
                 items = line.split()
-                if items[0] > length:
-                    continue
-
                 ret.add(items[2:], items[1])
         return ret
 
     def max_length(self):
         """
         返回词典中词组的最大长度
+        由于采用了枚举查找最大长度，所以尽量减少该方法的调用
         """
-        return self.__max_length
+        ret = 0
+        for phrase in self.__vocabulary:
+            ret = max(ret, phrase.length())
 
 
 class Phrase(object):
