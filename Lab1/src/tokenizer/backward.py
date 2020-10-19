@@ -1,13 +1,20 @@
 from copy import deepcopy
 from typing import List
 from vocabulary import Vocabulary
+from tqdm import tqdm
 
 
 class backward(object):
     def __init__(self, vocabulary: Vocabulary):
         self.__vocabulary = deepcopy(vocabulary)
 
-    def __call__(self, line: str) -> List[str]:
+    def __call__(self, lines: List[List[str]]) -> List[List[str]]:
+        ret: List[List[str]] = []
+        for line in tqdm(lines):
+            ret.append(self.__backward(line[0]))
+        return ret
+
+    def backward(self, line: str) -> List[str]:
         ret: List[str] = []
         length = len(line)
         current = length

@@ -1,6 +1,5 @@
 from typing import List
 from copy import deepcopy
-from tqdm import tqdm
 
 
 class Paragraph(object):
@@ -39,8 +38,7 @@ class Paragraph(object):
             return
 
         print("tokenizing:")
-        for i in tqdm(range(self.length())):
-            self.__lines[i] = tokenizer(self.__lines[i][0])
+        self.__lines = tokenizer(self.__lines)
         self.set_tokenized()
 
     def load(path: str, tokenized: bool, max_line: int = None):
