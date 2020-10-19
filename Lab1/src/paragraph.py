@@ -44,6 +44,7 @@ class Paragraph(object):
     def load(path: str, tokenized: bool, max_line: int = None):
         """
         从数据文件中读取文章
+        保留空行
 
         :param path: 文章路径
         :param tokenized: 读取的文章是否已完成分词
@@ -54,6 +55,8 @@ class Paragraph(object):
             i = 0
             for line in f:
                 lines.append(line.split())
+                if len(lines[i]) == 0:
+                    lines[i].append([])
                 i += 1
                 if max_line is not None and i == max_line:
                     break
