@@ -9,6 +9,9 @@ if __name__ == "__main__":
     if args.storage == "linear_list":
         from storage.linear import LinearList
         storage = LinearList()
+    if args.storage == "hash_bucket":
+        from storage.hash_bucket import HashBucket
+        storage = HashBucket()
     vocabulary = Vocabulary.load(args.vocabulary_path, args.max_gram, storage)
 
     if args.tokenizer == "forward":
