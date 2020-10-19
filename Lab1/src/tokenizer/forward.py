@@ -20,5 +20,8 @@ class forward(object):
                     ret = ret + phrase
                     current = current + i
                     break
+                if i == 1:
+                    ret = ret + [line[current:current + 1]]
+                    current = current + 1
 
         return ret

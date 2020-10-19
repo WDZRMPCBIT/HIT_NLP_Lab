@@ -14,11 +14,14 @@ class backward(object):
         max_length = self.__vocabulary.max_length()
 
         while current > 0:
-            for i in reversed(range(1, min(max_length, current+1))):
-                phrase = self.__vocabulary.get(line[current-i: current])
+            for i in reversed(range(1, min(max_length, current + 1))):
+                phrase = self.__vocabulary.get(line[current - i:current])
                 if phrase is not None:
                     ret = ret + phrase
                     current = current - i
                     break
+                if i == 1:
+                    ret = ret + [line[current - 1:current]]
+                    current = current - 1
 
         return reversed(ret)
