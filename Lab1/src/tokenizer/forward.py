@@ -14,9 +14,10 @@ class forward(object):
         max_length = self.__vocabulary.max_length()
 
         while current < length:
-            for i in reversed(range(1, max_length)):
-                if self.__vocabulary.get([line[current: current+i]]):
-                    ret.append(line[current: current+i])
+            for i in reversed(range(1, min(max_length, length - current + 1))):
+                phrase = self.__vocabulary.get(line[current:current + i])
+                if phrase is not None:
+                    ret = ret + phrase
                     current = current + i
                     break
 

@@ -1,25 +1,27 @@
 from typing import List
+from phrase import Phrase
+from copy import deepcopy
 
 
 class LinearList(object):
     def __init__(self):
-        self.__dictionary: List[str] = []
+        self.__dictionary: List[Phrase] = []
 
-    def add(self, phrase: str, occ: int):
+    def add(self, phrase: Phrase):
         """
         向线性表中添加一个词组
 
         :param phrase: 待添加词组
-        :param occ: 该词组出现的次数
         """
         self.__dictionary.append(phrase)
 
-    def get(self, phrase: str) -> int:
+    def get(self, phrase: str) -> Phrase:
         """
-        查询线性表中某个词组是否存在，若不存在，返回-1；否则，返回任意值
+        查询线性表中某个词组是否存在，若不存在，返回None；否则，返回相应的Phrase
 
         :param phrase: 待查询词组
         """
-        if phrase in self.__dictionary:
-            return 1
-        return -1
+        for p in self.__dictionary:
+            if p.phrase() == phrase:
+                return deepcopy(p)
+        return None

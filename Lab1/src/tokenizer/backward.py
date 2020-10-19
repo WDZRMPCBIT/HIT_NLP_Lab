@@ -15,8 +15,9 @@ class backward(object):
 
         while current > 0:
             for i in reversed(range(1, min(max_length, current+1))):
-                if self.__vocabulary.get([line[current-i: current]]):
-                    ret.append(line[current-i: current])
+                phrase = self.__vocabulary.get(line[current-i: current])
+                if phrase is not None:
+                    ret = ret + phrase
                     current = current - i
                     break
 

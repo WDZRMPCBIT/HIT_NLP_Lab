@@ -1,5 +1,6 @@
 from typing import List
 from copy import deepcopy
+from phrase import Phrase
 
 
 class Vocabulary(object):
@@ -10,26 +11,26 @@ class Vocabulary(object):
     def add(self, words: List[str], occ: int):
         """
         向词组表中添加一个词组
+        不消重
 
         :param words: 要添加的词组
         :param occ: 词组出现的次数
         """
         current = Phrase(words, occ)
-        if self.__storage.get(current.phrase()) == -1:
-            self.__storage.add(current.phrase(), occ)
-            self.__vocabulary.append(current)
+        self.__storage.add(current)
+        self.__vocabulary.append(current)
 
-    def get(self, words: List[str]) -> bool:
+    def get(self, word: str) -> List[str]:
         """
         从词组表中查询一个单词是否存在
-        若存在，则返回True
+        若存在，则返回相应的词组；否则，返回None
 
-        :param words: 待查询的单词
+        :param word: 待查询的单词
         """
-        current = Phrase(words, 0)
-        if self.__storage.get(current.phrase()) != -1:
-            return True
-        return False
+        ret = self.__storage.get(word)
+        if ret is not None:
+            return deepcopy(self.__storage.get(word).words())
+        return None
 
     def load(path: str, length: int, storage):
         """
@@ -60,44 +61,3 @@ class Vocabulary(object):
         for phrase in self.__vocabulary:
             ret = max(ret, phrase.length())
         return ret
-
-
-class Phrase(object):
-    def __init__(self, words: List[str], occ: int):
-        """
-        表示一个词组
-
-        :param words: 词组
-        :paran occ: 词组出现的次数，若为临时使用，请设为0
-        """
-        self.__words = deepcopy(words)
-        self.__occ = occ
-
-    def words(self):
-        """
-        将存储的词组以List[str]的形式返回
-        """
-        return deepcopy(self.__words)
-
-    def phrase(self):
-        """
-        将存储的词组以单个string的形式返回
-        """
-        ret: str = ""
-        for i in range(len(self.__words)):
-            if i != 0:
-                ret = ret + " "
-            ret = ret + self.__words[i]
-        return ret
-
-    def occ(self):
-        """
-        返回该词组出现的次数
-        """
-        return self.__occ
-
-    def length(self):
-        """
-        返回组成词组的字的个数
-        """
-        return len(self.phrase())
