@@ -32,6 +32,9 @@
 ### [vocabulary.py](src/vocabulary.py)
 内含一个处理词组表的类  
 实例化时需要接收一个组织存储结构的方式（storage）
+### [phrase.py](src/phrase.py)
+内含一个处理词组的类  
+存储该词组及其出现的次数
 ### [utils.py](src/utils.py)
 各种计算评测结果的函数  
 我个人建议每个方法接收两个Paragraph作为参数
