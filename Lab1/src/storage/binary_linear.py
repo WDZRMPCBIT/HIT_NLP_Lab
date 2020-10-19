@@ -5,6 +5,10 @@ from typing import List
 
 class BinaryLinearList(object):
     def __init__(self, max_gram: int):
+        """
+        使用二分查找的线性表词典结构
+        要求插入词组的顺序按照字典序升序
+        """
         self.__dictionary: List[List[Phrase]] = []
         self.__gram = 0
         for i in range(max_gram):
