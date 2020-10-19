@@ -39,3 +39,9 @@ class Phrase(object):
         返回组成词组的字的个数
         """
         return len(self.phrase())
+
+    def gram(self):
+        """
+        返回组成词组的单词的个数
+        """
+        return len(self.__words)

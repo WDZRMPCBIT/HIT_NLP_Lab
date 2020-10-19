@@ -32,14 +32,14 @@ class Vocabulary(object):
             return deepcopy(self.__storage.get(word).words())
         return None
 
-    def load(path: str, length: int, storage):
+    def load(path: str, max_gram: int, storage):
         """
         从词典文件中加载词组
         词典文件每一行的格式为：
         词组单词个数 词组出现次数 单词1 单词2 ...
 
         :param path: 词典文件路径
-        :param length: 词组单词的最大个数
+        :param max_gram: 词组单词的最大个数
         :param storage: 词典组织类
         """
         ret = Vocabulary(storage)
@@ -47,14 +47,14 @@ class Vocabulary(object):
             for line in f:
                 items = line.split()
 
-                if int(items[0]) > length:
+                if int(items[0]) > max_gram:
                     break
                 ret.add(items[2:], items[1])
         return ret
 
     def max_length(self):
         """
-        返回词典中词组的最大长度
+        返回词典中词组的最大单字长度
         由于采用了枚举查找最大长度，所以尽量减少该方法的调用
         """
         ret = 0

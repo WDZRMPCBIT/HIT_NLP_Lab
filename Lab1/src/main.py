@@ -3,11 +3,13 @@ from paragraph import Paragraph
 from vocabulary import Vocabulary
 
 if __name__ == "__main__":
+    if args.storage == "binary_linear_list":
+        from storage.binary_linear import BinaryLinearList
+        storage = BinaryLinearList(args.max_gram)
     if args.storage == "linear_list":
         from storage.linear import LinearList
         storage = LinearList()
-    vocabulary = Vocabulary.load(
-        args.vocabulary_path, args.max_length, storage)
+    vocabulary = Vocabulary.load(args.vocabulary_path, args.max_gram, storage)
 
     if args.tokenizer == "forward":
         from tokenizer.forward import forward
