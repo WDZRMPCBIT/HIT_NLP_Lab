@@ -56,7 +56,7 @@ class Paragraph(object):
             for line in f:
                 lines.append(line.split())
                 if len(lines[i]) == 0:
-                    lines[i].append([])
+                    lines[i].append('')
                 i += 1
                 if max_line is not None and i == max_line:
                     break
