@@ -14,7 +14,7 @@ class Backward(object):
             ret.append(self.__backward(line[0]))
         return ret
 
-    def Backward(self, line: str) -> List[str]:
+    def __backward(self, line: str) -> List[str]:
         ret: List[str] = []
         length = len(line)
         current = length
