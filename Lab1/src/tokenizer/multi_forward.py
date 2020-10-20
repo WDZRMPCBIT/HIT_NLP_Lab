@@ -2,7 +2,6 @@ from copy import deepcopy
 from typing import List
 from vocabulary import Vocabulary
 import multiprocessing
-from tqdm import tqdm
 
 
 class MultiProcessForward(object):
@@ -35,7 +34,7 @@ class MultiProcessForward(object):
 
     def _split(self, lines: List[List[str]], begin: int,
                end: int, ret: List[List[str]]):
-        for i in tqdm(range(begin, end)):
+        for i in range(begin, end):
             ret[i] = self._forward(lines[i][0])
 
     def _forward(self, line: str) -> List[str]:
