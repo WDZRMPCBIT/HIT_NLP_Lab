@@ -4,7 +4,7 @@ from vocabulary import Vocabulary
 from tqdm import tqdm
 
 
-class backward(object):
+class Backward(object):
     def __init__(self, vocabulary: Vocabulary):
         self.__vocabulary = deepcopy(vocabulary)
 
@@ -14,7 +14,7 @@ class backward(object):
             ret.append(self.__backward(line[0]))
         return ret
 
-    def backward(self, line: str) -> List[str]:
+    def Backward(self, line: str) -> List[str]:
         ret: List[str] = []
         length = len(line)
         current = length

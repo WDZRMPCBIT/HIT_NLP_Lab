@@ -1,29 +1,44 @@
 from copy import deepcopy
 from typing import List
 from vocabulary import Vocabulary
-import _thread
+import multiprocessing
+from tqdm import tqdm
 
 
-class MultiThreadForward(object):
+class MultiProcessForward(object):
     def __init__(self, vocabulary: Vocabulary, thread: int = 4):
         self.__vocabulary = deepcopy(vocabulary)
         self.__thread = thread
 
     def __call__(self, lines: List[List[str]]) -> List[List[str]]:
+        ret = multiprocessing.Manager().list()
+        for i in range(len(lines)):
+            ret.append([])
+        process = []
+
         length = len(lines) // self.__thread
         position = 0
         for i in range(1, self.__thread):
-            _thread.start_new_thread(self.__split,
-                                     (lines, position, position + length))
+            process.append(multiprocessing.Process(
+                target=self._split,
+                args=(lines, position, position + length, ret, )))
             position += length
-        _thread.start_new_thread(self.__split, (lines, position, None))
+        process.append(multiprocessing.Process(
+            target=self._split, args=(lines, position, len(lines), ret, )))
 
-    def __split(self, lines: List[List[str]], begin: int,
-                end: int) -> List[List[str]]:
-        for i in range(begin, end):
-            lines[i] = self.__forward(lines[i][0])
+        for p in process:
+            p.start()
+        for p in process:
+            p.join()
 
-    def __forward(self, line: str) -> List[str]:
+        return list(ret)
+
+    def _split(self, lines: List[List[str]], begin: int,
+               end: int, ret: List[List[str]]):
+        for i in tqdm(range(begin, end)):
+            ret[i] = self._forward(lines[i][0])
+
+    def _forward(self, line: str) -> List[str]:
         ret: List[str] = []
         current = 0
         length = len(line)

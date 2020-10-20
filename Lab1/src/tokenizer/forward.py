@@ -4,7 +4,7 @@ from vocabulary import Vocabulary
 from tqdm import tqdm
 
 
-class forward(object):
+class Forward(object):
     def __init__(self, vocabulary: Vocabulary):
         self.__vocabulary = deepcopy(vocabulary)
 
