@@ -20,8 +20,10 @@ parser.add_argument('--result_path',
 parser.add_argument('--tokenizer',
                     '-t',
                     type=str,
-                    default="multi_forward",
+                    default="backward",
                     help="分词器类型")
+parser.add_argument('--multiple_process', '-mp',
+                    type=bool, default=True, help="启用多进程")
 parser.add_argument('--storage',
                     '-s',
                     type=str,

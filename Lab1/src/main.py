@@ -20,9 +20,11 @@ if __name__ == "__main__":
     if args.tokenizer == "backward":
         from tokenizer.backward import Backward
         tokenizer = Backward(vocabulary)
-    if args.tokenizer == "multi_forward":
-        from tokenizer.multi_forward import MultiProcessForward
-        tokenizer = MultiProcessForward(vocabulary)
+
+    if args.multiple_process:
+        from tokenizer.multi_process import MultiProcess
+        tokenizer = MultiProcess(tokenizer)
+
     paragraph = Paragraph.load(args.data_path, False, args.max_line)
     paragraph.tokenize(tokenizer)
     paragraph.save(args.result_path)
