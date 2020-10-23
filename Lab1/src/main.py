@@ -36,7 +36,7 @@ if __name__ == "__main__":
     precision, callback, F1 = esitmate(args.result_path, args.standard_path)
     with open(args.output_path, 'a') as f:
         f.write("tokenizer: " + args.tokenizer + "\n")
-        f.write("multi-process: " + str(args.tokenizer) + "\n")
+        f.write("multi-process: " + str(args.multiple_process) + "\n")
         f.write("storage: " + args.storage + "\n")
         f.write("max gram: " + str(args.max_gram) + "\n")
         f.write("precision: " + str(precision) + "\n")
