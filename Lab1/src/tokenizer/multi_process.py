@@ -1,10 +1,13 @@
 from copy import deepcopy
 from typing import List
 import multiprocessing
+from math import ceil
 
 
 class MultiProcess(object):
-    def __init__(self, tokenizer, process: int = multiprocessing.cpu_count()):
+    def __init__(self,
+                 tokenizer,
+                 process: int = ceil(multiprocessing.cpu_count() * 2 / 3)):
         self.__process = process
         self.__tokenizer = deepcopy(tokenizer)
 
