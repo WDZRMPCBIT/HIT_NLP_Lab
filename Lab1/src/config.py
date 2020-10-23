@@ -17,13 +17,26 @@ parser.add_argument('--result_path',
                     type=str,
                     default="../result/forward.txt",
                     help="输出路径")
+parser.add_argument('--standard_path',
+                    '-sp',
+                    type=str,
+                    default="../result/simplified.txt",
+                    help="分词标准路径")
+parser.add_argument('--output_path',
+                    '-op',
+                    type=str,
+                    default="../result/score.txt",
+                    help="评估结果输出路径")
 parser.add_argument('--tokenizer',
                     '-t',
                     type=str,
-                    default="backward",
+                    default="forward",
                     help="分词器类型")
-parser.add_argument('--multiple_process', '-mp',
-                    type=bool, default=True, help="启用多进程")
+parser.add_argument('--multiple_process',
+                    '-mp',
+                    type=bool,
+                    default=True,
+                    help="启用多进程")
 parser.add_argument('--storage',
                     '-s',
                     type=str,

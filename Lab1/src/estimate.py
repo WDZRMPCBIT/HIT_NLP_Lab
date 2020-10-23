@@ -2,14 +2,12 @@ from typing import List
 from copy import deepcopy
 
 
-def esitmate(predicate: str, standard: str, output: str):
+def esitmate(predicate: str, standard: str):
     """
     计算一个分词结果的准确率, 召回率, F1
 
     :param predicate: 待评估文件路径
     :param standard: 分词标准文件路径
-    :param output: 结果输出路径
-    :param max_line: 处理最大行数
     """
     standard_sum = 0
     standard_paragraph: List[List[str]] = []
@@ -35,12 +33,4 @@ def esitmate(predicate: str, standard: str, output: str):
     callback = match / predicate_sum
     F1 = 2 * precision * callback / (precision + callback)
 
-    with open(output, 'w') as f:
-        f.write("precision: " + str(precision) + "\n")
-        f.write("callback: " + str(callback) + "\n")
-        f.write("F1: " + str(F1) + "\n")
-
-
-if __name__ == "__main__":
-    esitmate("../result/forward.txt", "../result/simplified.txt",
-             "../result/score.txt")
+    return precision, callback, F1

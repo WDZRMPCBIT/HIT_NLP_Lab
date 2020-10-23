@@ -1,6 +1,7 @@
 from config import args
 from paragraph import Paragraph
 from vocabulary import Vocabulary
+from estimate import esitmate
 
 if __name__ == "__main__":
     if args.storage == "binary_linear_list":
@@ -28,3 +29,14 @@ if __name__ == "__main__":
     paragraph = Paragraph.load(args.data_path, False, args.max_line)
     paragraph.tokenize(tokenizer)
     paragraph.save(args.result_path)
+
+    precision, callback, F1 = esitmate(args.result_path, args.standard_path)
+    with open(args.output_path, 'a') as f:
+        f.write("tokenizer: " + args.tokenizer + "\n")
+        f.write("multi-process: " + str(args.tokenizer) + "\n")
+        f.write("storage: " + args.storage + "\n")
+        f.write("max gram: " + args.max_gram + "\n")
+        f.write("precision: " + str(precision) + "\n")
+        f.write("callback: " + str(callback) + "\n")
+        f.write("F1: " + str(F1) + "\n")
+        f.write("\n")
