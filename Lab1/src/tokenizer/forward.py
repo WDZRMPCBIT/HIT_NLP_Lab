@@ -22,7 +22,8 @@ class Forward(object):
 
         while current < length:
             for i in reversed(range(1, min(max_length, length - current + 1))):
-                phrase = self.__vocabulary.get(line[current:current + i])
+                phrase = self.__vocabulary.get(line[current:current +
+                                                    i]).words()
                 if phrase is not None:
                     ret = ret + phrase
                     current = current + i

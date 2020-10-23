@@ -22,7 +22,8 @@ class Backward(object):
 
         while current > 0:
             for i in reversed(range(1, min(max_length, current + 1))):
-                phrase = self.__vocabulary.get(line[current - i:current])
+                phrase = self.__vocabulary.get(line[current -
+                                                    i:current]).words()
                 if phrase is not None:
                     ret = ret + phrase
                     current = current - i

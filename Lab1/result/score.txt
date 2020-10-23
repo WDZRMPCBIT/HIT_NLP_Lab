@@ -1,3 +1,8 @@
-precision: 0.9730930266598068
-callback: 0.9807425938489371
-F1: 0.9769028356378876
+tokenizer: segmentation
+multi-process: segmentation
+storage: hash_bucket
+max gram: 2
+precision: 1.490011227672839e-05
+callback: 1.0
+F1: 2.9799780533381015e-05
+

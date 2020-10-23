@@ -15,7 +15,7 @@ parser.add_argument('--vocabulary_path',
 parser.add_argument('--result_path',
                     '-rp',
                     type=str,
-                    default="../result/forward.txt",
+                    default="../result/segmentation.txt",
                     help="输出路径")
 parser.add_argument('--standard_path',
                     '-sp',
@@ -30,12 +30,12 @@ parser.add_argument('--output_path',
 parser.add_argument('--tokenizer',
                     '-t',
                     type=str,
-                    default="forward",
+                    default="segmentation",
                     help="分词器类型")
 parser.add_argument('--multiple_process',
                     '-mp',
                     type=bool,
-                    default=True,
+                    default=False,
                     help="启用多进程")
 parser.add_argument('--storage',
                     '-s',
@@ -45,12 +45,12 @@ parser.add_argument('--storage',
 parser.add_argument('--max_line',
                     '-ml',
                     type=int,
-                    default=None,
+                    default=1,
                     help="处理文件最大行数")
 parser.add_argument('--max_gram',
                     '-mg',
                     type=int,
-                    default=1,
+                    default=2,
                     help="组成词组的最大单词数")
 
 args = parser.parse_args()

@@ -21,6 +21,9 @@ if __name__ == "__main__":
     if args.tokenizer == "backward":
         from tokenizer.backward import Backward
         tokenizer = Backward(vocabulary)
+    if args.tokenizer == "segmentation":
+        from tokenizer.segmentation import OmniSegmentation
+        tokenizer = OmniSegmentation(vocabulary)
 
     if args.multiple_process:
         from tokenizer.multi_process import MultiProcess
@@ -35,7 +38,7 @@ if __name__ == "__main__":
         f.write("tokenizer: " + args.tokenizer + "\n")
         f.write("multi-process: " + str(args.tokenizer) + "\n")
         f.write("storage: " + args.storage + "\n")
-        f.write("max gram: " + args.max_gram + "\n")
+        f.write("max gram: " + str(args.max_gram) + "\n")
         f.write("precision: " + str(precision) + "\n")
         f.write("callback: " + str(callback) + "\n")
         f.write("F1: " + str(F1) + "\n")
