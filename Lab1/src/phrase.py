@@ -19,13 +19,18 @@ class Phrase(object):
         """
         return deepcopy(self.__words)
 
-    def phrase(self):
+    def phrase(self, sep=''):
         """
         将存储的词组以单个string的形式返回
+
+        :param sep: 分隔符
         """
         ret: str = ""
-        for i in range(len(self.__words)):
+        length = len(self.__words)
+        for i in range(length):
             ret = ret + self.__words[i]
+            if i != length - 1:
+                ret = ret + sep
         return ret
 
     def occ(self):

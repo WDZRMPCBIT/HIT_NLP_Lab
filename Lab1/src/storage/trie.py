@@ -1,3 +1,4 @@
+from copy import deepcopy
 from phrase import Phrase
 
 
@@ -12,30 +13,31 @@ class Trie:
         :param phrase: 待添加的词组
         """
         node = self.__root
-        phrase = phrase.phrase()
+        word = phrase.phrase(sep=' ')
 
-        for s in phrase:
+        for s in word:
             if s in node.keys():
                 node = node[s]
             else:
                 node[s] = {}
                 node = node[s]
-        node['is_word'] = True
+        node['is_word'] = phrase
 
-    def get(self, phrase: Phrase):
+    def get(self, phrase: str) -> Phrase:
         """
-        Returns if the word is in the trie.
+        查询Trie中某个词组是否存在，若不存在，返回None；否则，返回相应的Phrase
+
+        :param phrase: 待查询词组
         """
         node = self.__root
-        phrase = phrase.phrase()
 
         for s in phrase:
             if s in node.keys():
                 node = node[s]
             else:
-                return False
+                return None
 
         if 'is_word' in node.keys():
-            return True
+            return deepcopy(node['is_word'])
         else:
-            return False
+            return None

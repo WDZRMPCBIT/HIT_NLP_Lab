@@ -1,0 +1,9 @@
+tokenizer: segmentation
+multi-process: True
+storage: trie
+max gram: 2
+max line: 100
+precision: 0.9373425163782967
+callback: 0.8893847625119541
+F1: 0.9127341130285433
+

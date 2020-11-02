@@ -13,6 +13,9 @@ if __name__ == "__main__":
     if args.storage == "hash_bucket":
         from storage.hash_bucket import HashBucket
         storage = HashBucket()
+    if args.storage == "trie":
+        from storage.trie import Trie
+        storage = Trie()
     vocabulary = Vocabulary.load(args.vocabulary_path, args.max_gram, storage)
 
     if args.tokenizer == "forward":
@@ -31,14 +34,18 @@ if __name__ == "__main__":
 
     paragraph = Paragraph.load(args.data_path, False, args.max_line)
     paragraph.tokenize(tokenizer)
-    paragraph.save(args.result_path)
+    paragraph.save(args.result_path + "/" + args.tokenizer +
+                   "+" + args.storage + ".txt")
 
-    precision, callback, F1 = esitmate(args.result_path, args.standard_path)
+    precision, callback, F1 = esitmate(
+        args.result_path + "/" + args.tokenizer + "+" + args.storage + ".txt",
+        args.standard_path)
     with open(args.output_path, 'a') as f:
         f.write("tokenizer: " + args.tokenizer + "\n")
         f.write("multi-process: " + str(args.multiple_process) + "\n")
         f.write("storage: " + args.storage + "\n")
         f.write("max gram: " + str(args.max_gram) + "\n")
+        f.write("max line: " + str(args.max_line) + "\n")
         f.write("precision: " + str(precision) + "\n")
         f.write("callback: " + str(callback) + "\n")
         f.write("F1: " + str(F1) + "\n")
