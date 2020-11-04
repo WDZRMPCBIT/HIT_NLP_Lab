@@ -1,8 +1,8 @@
 from time import time
 from config import args
-from paragraph import Paragraph
-from vocabulary import Vocabulary
-from estimate import esitmate
+from utils.paragraph import Paragraph
+from utils.vocabulary import Vocabulary
+from utils.estimate import esitmate
 
 if __name__ == "__main__":
     if args.storage == "binary_linear_list":

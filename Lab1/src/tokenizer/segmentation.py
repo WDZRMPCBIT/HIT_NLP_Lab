@@ -1,7 +1,7 @@
 from copy import deepcopy
 from typing import List
-from vocabulary import Vocabulary
-from phrase import Phrase
+from utils.vocabulary import Vocabulary
+from utils.phrase import Phrase
 from tqdm import tqdm
 
 

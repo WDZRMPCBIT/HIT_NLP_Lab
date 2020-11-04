@@ -1,5 +1,5 @@
 from typing import List
-from phrase import Phrase
+from utils.phrase import Phrase
 from copy import deepcopy
 
 

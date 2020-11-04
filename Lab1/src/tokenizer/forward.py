@@ -1,6 +1,6 @@
 from copy import deepcopy
 from typing import List
-from vocabulary import Vocabulary
+from utils.vocabulary import Vocabulary
 from tqdm import tqdm
 
 
@@ -22,13 +22,12 @@ class Forward(object):
 
         while current < length:
             for i in reversed(range(1, min(max_length, length - current + 1))):
-                phrase = self.__vocabulary.get(line[current:current +
-                                                    i]).words()
+                phrase = self.__vocabulary.get(line[current:current + i])
                 if phrase is not None:
-                    ret = ret + phrase
+                    ret = ret + phrase.words()
                     current = current + i
                     break
-                if i == 1:
+                elif i == 1:
                     ret = ret + [line[current:current + 1]]
                     current = current + 1
 

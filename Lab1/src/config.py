@@ -30,24 +30,32 @@ parser.add_argument('--output_path',
 parser.add_argument('--tokenizer',
                     '-t',
                     type=str,
-                    default="segmentation",
+                    default="backward",
                     help="分词器类型")
 parser.add_argument('--multiple_process',
                     '-mp',
                     type=bool,
                     default=True,
                     help="启用多进程")
-parser.add_argument('--storage', '-s', type=str, default="trie", help="词典组织结构")
-parser.add_argument('--max_line', '-ml', type=int, default=1, help="处理文件最大行数")
+parser.add_argument('--storage',
+                    '-s',
+                    type=str,
+                    default="hash_bucket",
+                    help="词典组织结构")
+parser.add_argument('--max_line',
+                    '-ml',
+                    type=int,
+                    default=100,
+                    help="处理文件最大行数")
 parser.add_argument('--max_gram',
                     '-mg',
                     type=int,
-                    default=1,
+                    default=2,
                     help="组成词组的最大单词数")
 parser.add_argument('--save_result',
                     '-sr',
                     type=bool,
-                    default=False,
+                    default=True,
                     help="是否保存测试结果")
 
 args = parser.parse_args()

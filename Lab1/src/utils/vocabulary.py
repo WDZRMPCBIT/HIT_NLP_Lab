@@ -1,6 +1,6 @@
 from typing import List
 from copy import deepcopy
-from phrase import Phrase
+from utils.phrase import Phrase
 from tqdm import tqdm
 
 

@@ -1,6 +1,6 @@
 from copy import deepcopy
 from typing import List
-from phrase import Phrase
+from utils.phrase import Phrase
 
 
 class Trie(object):
