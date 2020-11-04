@@ -41,7 +41,7 @@
 我个人建议每个方法接收两个Paragraph作为参数
 ### [storage](src/storage)
 词典结构组织器的文件夹  
-每个组织器应当实现add(str)和get(str) -> int两个方法
+每个组织器应当实现add(Phrase)和get(str) -> Phrase两个方法
 ### [tokenizer](src/tokenizer)
 分词器的文件夹  
-每个分词器应当实现__call__(str) -> List[str]方法
+每个分词器应当实现__call__(List[List[str]]) -> List[List[str]]方法

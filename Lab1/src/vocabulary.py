@@ -44,7 +44,13 @@ class Vocabulary(object):
         :param storage: 词典组织类
         """
         ret = Vocabulary(storage)
-        num_file = sum([1 for i in open(path, "r", encoding='utf-8')])
+        num_file = 0
+        with open(path, 'r', encoding='utf-8') as f:
+            for line in f:
+                items = line.split()
+                if int(items[0]) > max_gram:
+                    break
+                num_file += 1
 
         print("loading vocabulary:")
         with open(path, 'r', encoding='utf-8') as f:
