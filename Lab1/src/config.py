@@ -45,7 +45,7 @@ parser.add_argument('--storage',
 parser.add_argument('--max_line',
                     '-ml',
                     type=int,
-                    default=100,
+                    default=None,
                     help="处理文件最大行数")
 parser.add_argument('--max_gram',
                     '-mg',
