@@ -1,5 +1,8 @@
 from config import args
 from utils.data import Paragraph
+from utils.data import Vocabulary
+from utils.model import BertRecognizer
+from utils.processor import Processor
 
 
 def set_random_seed(seed: int):
@@ -20,13 +23,15 @@ def set_random_seed(seed: int):
 if __name__ == '__main__':
     set_random_seed(args.random_seed)
 
-    train = Paragraph(args.data_path + "/train.txt")
-    valid = Paragraph(args.data_path + "/valid.txt")
-    test = Paragraph(args.data_path + "/test.txt")
-    t = train.package(300)
-    print(len(t))
-    """
-    for word, slot in t:
-        print(len(word))
-        print(len(slot))
-    """
+    slot_vocabulary = Vocabulary()
+
+    train = Paragraph(args.data_path + "/train.txt", slot_vocabulary, args.max_length)
+    valid = Paragraph(args.data_path + "/valid.txt", slot_vocabulary, args.max_length)
+    test = Paragraph(args.data_path + "/test.txt", slot_vocabulary, args.max_length, False)
+
+    model = BertRecognizer(len(slot_vocabulary), args.dropout)
+    processor = Processor(model)
+
+    processor.load(args.model_path)
+    processor.train(train, valid)
+    processor.predicate(test, args.save_path)

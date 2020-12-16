@@ -4,7 +4,7 @@ from transformers import BertTokenizer
 
 class Tokenizer(object):
     def __init__(self):
-        self.__tokenizer = BertTokenizer.from_pretrained("bert-base-unused")
+        self.__tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
 
     def __call__(self, batch: List[List[str]]):
         """
@@ -13,8 +13,8 @@ class Tokenizer(object):
         :param batch: batch to be tokenized
         """
         cnt = len(batch)
-        pieces: List[List[str]] = [[]] * cnt
-        spans: List[List[int]] = [[]] * cnt
+        pieces: List[List[str]] = [[] for _ in range(cnt)]
+        spans: List[List[int]] = [[] for _ in range(cnt)]
 
         for i in range(cnt):
             length = 0
@@ -22,7 +22,7 @@ class Tokenizer(object):
                 word = batch[i][j]
                 piece = self.__tokenizer.tokenize(word)
 
-                pieces[i].append(piece)
+                pieces[i].extend(piece)
                 spans[i].append((length, length + len(piece)))
                 length += len(piece)
 
