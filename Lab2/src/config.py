@@ -7,6 +7,8 @@ parser.add_argument('--random_seed',
                     type=int,
                     default=0,
                     help="random seed")
+parser.add_argument('--mode', '-m', type=str, default='test',
+                    help="which to train or test model")
 
 parser.add_argument('--data_path',
                     '-dp',
@@ -19,7 +21,7 @@ parser.add_argument('--model_path',
                     default='../model/model.pkl',
                     help="path to save model")
 parser.add_argument('--save_path', '-sp', type=str,
-                    default='../data/out.txt', help="ooutput path")
+                    default='../out.txt', help="ooutput path")
 parser.add_argument('--max_length',
                     '-ml',
                     type=int,

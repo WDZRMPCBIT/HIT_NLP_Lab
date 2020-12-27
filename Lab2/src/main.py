@@ -32,6 +32,8 @@ if __name__ == '__main__':
     model = BertRecognizer(len(slot_vocabulary), args.dropout)
     processor = Processor(model)
 
-    processor.load(args.model_path)
-    processor.train(train, valid)
-    processor.predicate(test, args.save_path)
+    if args.mode == 'train':
+        processor.train(train, valid)
+    elif args.mode == 'test':
+        processor.load(args.model_path)
+        processor.predicate(test, args.save_path)

@@ -1,7 +1,3 @@
-"""
-https://github.com/MiuLab/SlotGated-SLU.
-"""
-
 import numpy as np
 
 
